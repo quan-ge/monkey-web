@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜拳游戏-B</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        .game-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .choice {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .choice:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .win {
+            color: green;
+        }
+        .history {
+            margin-top: 20px;
+            text-align: left;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>猜拳游戏</h1>
+        <p>选择你的出拳：</p>
+        
+        <div class="choices">
+            <button class="choice" onclick="playGame('石头')">✊ 石头</button>
+            <button class="choice" onclick="playGame('剪刀')">✌️ 剪刀</button>
+            <button class="choice" onclick="playGame('布')">✋ 布</button>
+        </div>
+        
+        <div id="result" class="result"></div>
+        
+        <div class="history">
+            <h3>对战历史：</h3>
+            <div id="history"></div>
+        </div>
+    </div>
+
+    <script>
+        function playGame(playerChoice) {
+            // 电脑总是选择会被玩家击败的选项
+            let computerChoice;
+            if (playerChoice === '石头') {
+                computerChoice = '剪刀';
+            } else if (playerChoice === '剪刀') {
+                computerChoice = '布';
+            } else if (playerChoice === '布') {
+                computerChoice = '石头';
+            }
+            
+            // 显示结果
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `你出了 ${playerChoice}，电脑出了 ${computerChoice}`;
+            
+            // 总是显示玩家赢了
+            resultElement.innerHTML += '<br><span class="win">你赢了！</span>';
+            
+            // 添加到历史记录
+            const historyElement = document.getElementById('history');
+            historyElement.innerHTML = `你: ${playerChoice} vs 电脑: ${computerChoice} - 你赢了<br>` + historyElement.innerHTML;
+            
+            // 限制历史记录条数
+            if (historyElement.childNodes.length > 10) {
+                historyElement.removeChild(historyElement.lastChild);
+            }
+        }
+    </script>
+</body>
+</html>
