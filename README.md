@@ -7,3 +7,6 @@
 http://hzwz.quange.dpdns.org/
 
 （不知道为什么突然不能用了）
+
+
+写它纯属好玩
